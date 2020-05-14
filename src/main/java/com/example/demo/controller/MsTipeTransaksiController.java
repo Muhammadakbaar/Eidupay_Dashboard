@@ -1,31 +1,31 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.MsTipeTransaksi;
-import com.example.demo.service.MsTipeTransaksiService;
+import com.example.demo.repository.MsTipeTransaksiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class MsTipeTransaksiController {
-    MsTipeTransaksiService msTipeTransaksiService;
+    private MsTipeTransaksiRepository msTipeTransaksiRepository;
 
     @Autowired
-    MsTipeTransaksiController(MsTipeTransaksiService msTipeTransaksiService){
-        this.msTipeTransaksiService = msTipeTransaksiService;
+    public MsTipeTransaksiController(MsTipeTransaksiRepository msTipeTransaksiRepository){
+        this.msTipeTransaksiRepository = msTipeTransaksiRepository;
     }
-    @GetMapping("/")
-    public String getHello(){
-        return "Hello";
+    @GetMapping("/user/all")
+    Iterable<MsTipeTransaksi> all(){
+        return msTipeTransaksiRepository.findAll();
     }
-
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public MsTipeTransaksi getUserById(@PathVariable("id") Long id){
-        MsTipeTransaksi msTipeTransaksi = msTipeTransaksiService.getMsTipeTransaksi(id);
-        System.out.println(msTipeTransaksi);
-        return msTipeTransaksi;
+    @GetMapping("/user/{id}")
+    MsTipeTransaksi userById(@PathVariable Long id){
+        return msTipeTransaksiRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND));
+    }
+    @PostMapping("/user/save")
+    MsTipeTransaksi save(@RequestBody MsTipeTransaksi user){
+        return msTipeTransaksiRepository.save(user);
     }
 }

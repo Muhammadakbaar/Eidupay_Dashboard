@@ -1,21 +1,17 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "mstipetransaksi")
 public class MsTipeTransaksi {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     private String nama_tipe_transaksi;
     private String kode_transaksi;
-
-    public MsTipeTransaksi(){}
 
     public Long getId() {
         return id;
@@ -25,12 +21,12 @@ public class MsTipeTransaksi {
         this.id = id;
     }
 
-    public String getNama_tipe_ransaksi() {
+    public String getNama_tipe_transaksi() {
         return nama_tipe_transaksi;
     }
 
-    public void setNama_tipe_ransaksi(String nama_tipe_ransaksi) {
-        this.nama_tipe_transaksi = nama_tipe_ransaksi;
+    public void setNama_tipe_transaksi(String nama_tipe_transaksi) {
+        this.nama_tipe_transaksi = nama_tipe_transaksi;
     }
 
     public String getKode_transaksi() {
@@ -39,14 +35,5 @@ public class MsTipeTransaksi {
 
     public void setKode_transaksi(String kode_transaksi) {
         this.kode_transaksi = kode_transaksi;
-    }
-
-    @Override
-    public String toString(){
-        return "User{" +
-                "id=" + id +
-                ", nama_tipe_transaksi ='" + nama_tipe_transaksi + '\'' +
-                ", kode_transaksi ='" + kode_transaksi + '\'' +
-                '}';
     }
 }
