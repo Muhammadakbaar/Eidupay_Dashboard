@@ -1,24 +1,28 @@
 package com.example.demo.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "`MsTipeTransaksi`")
 public class MsTipeTransaksi {
+
     @Id
     @GeneratedValue
-    private Long id;
+    private Long id_tipetransaksi;
+
+    @Column(name = "`NamaTipeTransaksi`")
     private String nama_tipe_transaksi;
+
+    @Column(name = "`KodeTransaksi`")
     private String kode_transaksi;
 
-    public Long getId() {
-        return id;
+    public Long getIdTipetransaksi() {
+        return id_tipetransaksi;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long id_tipetransaksi) {
+        this.id_tipetransaksi = id_tipetransaksi;
     }
 
     public String getNama_tipe_transaksi() {

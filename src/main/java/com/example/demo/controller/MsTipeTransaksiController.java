@@ -15,16 +15,16 @@ public class MsTipeTransaksiController {
     public MsTipeTransaksiController(MsTipeTransaksiRepository msTipeTransaksiRepository){
         this.msTipeTransaksiRepository = msTipeTransaksiRepository;
     }
-    @GetMapping("/user/all")
-    Iterable<MsTipeTransaksi> all(){
+    @GetMapping("/data/all")
+    Iterable<MsTipeTransaksi> all (){
         return msTipeTransaksiRepository.findAll();
     }
-    @GetMapping("/user/{id}")
+    @GetMapping("/data/{id}")
     MsTipeTransaksi userById(@PathVariable Long id){
         return msTipeTransaksiRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND));
     }
-    @PostMapping("/user/save")
+    @PostMapping("/data/save")
     MsTipeTransaksi save(@RequestBody MsTipeTransaksi user){
         return msTipeTransaksiRepository.save(user);
     }
